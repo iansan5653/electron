@@ -4,17 +4,11 @@
 
 #include "atom/browser/net/network_context_service.h"
 
-#include <memory>
-#include <string>
-#include <utility>
-
 #include "atom/browser/atom_browser_client.h"
 #include "atom/browser/browser_process_impl.h"
 #include "atom/browser/net/system_network_context_manager.h"
-#include "base/bind_helpers.h"
 #include "chrome/common/chrome_constants.h"
 #include "content/public/browser/network_service_instance.h"
-#include "mojo/public/cpp/bindings/strong_binding.h"
 #include "services/network/network_service.h"
 
 namespace atom {
