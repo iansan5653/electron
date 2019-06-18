@@ -239,7 +239,7 @@ describe('protocol module', () => {
         expect(() => callback({
           path: filePath,
           headers: { 'X-Great-Header': 42 }
-        })).to.throw()
+        })).to.throw(Error, 'Header value has to be a string')
         done()
       }
       registerFileProtocol(protocolName, handler).then(() => {
