@@ -11,7 +11,6 @@
 #include <vector>
 
 #include "atom/browser/media/media_device_id_salt.h"
-#include "atom/browser/net/atom_cert_verifier.h"
 #include "atom/browser/net/url_request_context_getter.h"
 #include "base/memory/ref_counted_delete_on_sequence.h"
 #include "base/memory/weak_ptr.h"
