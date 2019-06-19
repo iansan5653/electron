@@ -502,8 +502,10 @@ bool TrayIconCocoa::GetIgnoreDoubleClickEvents() {
   return [status_item_view_ getIgnoreDoubleClickEvents];
 }
 
-void TrayIconCocoa::PopUpOnUI(AtomMenuModel* menu_model) {
-  [status_item_view_ popUpContextMenu:menu_model];
+void TrayIconCocoa::PopUpOnUI(scoped_refptr<AtomMenuModel> menu_model) {
+  auto* model = menu_model.get();
+  if (model)
+    [status_item_view_ popUpContextMenu:model];
 }
 
 void TrayIconCocoa::PopUpContextMenu(const gfx::Point& pos,
@@ -511,7 +513,7 @@ void TrayIconCocoa::PopUpContextMenu(const gfx::Point& pos,
   base::PostTaskWithTraits(
       FROM_HERE, {content::BrowserThread::UI},
       base::BindOnce(&TrayIconCocoa::PopUpOnUI, base::Unretained(this),
-                     base::Unretained(menu_model)));
+                     base::WrapRefCounted(menu_model)));
 }
 
 void TrayIconCocoa::SetContextMenu(AtomMenuModel* menu_model) {
