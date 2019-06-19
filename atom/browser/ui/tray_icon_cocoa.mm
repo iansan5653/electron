@@ -7,7 +7,7 @@
 #include <string>
 #include <vector>
 
-#include "atom/browser/ui/cocoa/atom_menu_controller.h"
+#include "base/strings/sys_string_conversions.h"
 
 namespace atom {
 
@@ -17,7 +17,6 @@ TrayIconCocoa::TrayIconCocoa() {
   // Create status bar item
   NSStatusItem* item = [[NSStatusBar systemStatusBar]
       statusItemWithLength:NSVariableStatusItemLength];
-  [[item button] setTitle:@"Hello World"];
   status_item_.reset([item retain]);
 }
 
@@ -27,23 +26,33 @@ TrayIconCocoa::~TrayIconCocoa() {
 
 void TrayIconCocoa::SetImage(const gfx::Image& image) {
   LOG(INFO) << "SetImage()";
+
+  [[status_item_ button] setImage:image.IsEmpty() ? nil : image.AsNSImage()];
 }
 
 void TrayIconCocoa::SetPressedImage(const gfx::Image& image) {
   LOG(INFO) << "SetPressedImage()";
+
+  [[status_item_ button]
+      setAlternateImage:image.IsEmpty() ? nil : image.AsNSImage()];
 }
 
 void TrayIconCocoa::SetToolTip(const std::string& tool_tip) {
   LOG(INFO) << "SetToolTip()";
+
+  [[status_item_ button] setToolTip:base::SysUTF8ToNSString(tool_tip)];
 }
 
 void TrayIconCocoa::SetTitle(const std::string& title) {
   LOG(INFO) << "SetTitle()";
+
+  [[status_item_ button] setTitle:base::SysUTF8ToNSString(title)];
 }
 
 std::string TrayIconCocoa::GetTitle() {
   LOG(INFO) << "GetTitle()";
-  return "TODO";
+
+  return base::SysNSStringToUTF8([[status_item_ button] title]);
 }
 
 void TrayIconCocoa::SetHighlightMode(TrayIcon::HighlightMode mode) {
