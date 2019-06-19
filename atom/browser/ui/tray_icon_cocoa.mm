@@ -13,6 +13,12 @@ namespace atom {
 
 TrayIconCocoa::TrayIconCocoa() {
   LOG(INFO) << "TrayIconCocoa()";
+
+  // Create status bar item
+  NSStatusItem* item = [[NSStatusBar systemStatusBar]
+      statusItemWithLength:NSVariableStatusItemLength];
+  [[item button] setTitle:@"Hello World"];
+  status_item_.reset([item retain]);
 }
 
 TrayIconCocoa::~TrayIconCocoa() {

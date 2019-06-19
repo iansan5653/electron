@@ -10,10 +10,10 @@
 #include <string>
 
 #include "atom/browser/ui/tray_icon.h"
-// #include "base/mac/scoped_nsobject.h"
+#include "base/mac/scoped_nsobject.h"
 
-@class AtomMenuController;
-@class StatusItemView;
+// @class AtomMenuController;
+// @class StatusItemView;
 
 namespace atom {
 
@@ -40,6 +40,9 @@ class TrayIconCocoa : public TrayIcon, public AtomMenuModel::Observer {
   void OnMenuWillClose() override;
 
  private:
+  // NSStatusItem instance.
+  base::scoped_nsobject<NSStatusItem> status_item_;
+
   // Atom custom view for NSStatusItem.
   // base::scoped_nsobject<StatusItemView> status_item_view_;
 
