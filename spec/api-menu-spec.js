@@ -844,7 +844,7 @@ describe('Menu module', () => {
     } catch (err) {
       testFn = it.skip
     }
-    const sendRobotjsKey = (key, modifiers = [], delay = 500) => {
+    const sendRobotjsKey = (key, modifiers = [], delay = 1500) => {
       return new Promise((resolve, reject) => {
         require('robotjs').keyTap(key, modifiers)
         setTimeout(() => {
